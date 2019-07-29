@@ -30,6 +30,7 @@ import kotlinx.coroutines.*
 /**
  * ViewModel for SleepTrackerFragment.
  */
+@Suppress("HasPlatformType")
 class   SleepTrackerViewModel(
         val database: SleepDatabaseDao,
         application: Application) : AndroidViewModel(application) {
@@ -41,6 +42,8 @@ class   SleepTrackerViewModel(
     val nightsString = Transformations.map(nights) { nights ->
         formatNights(nights, application.resources)
     }
+    val nightsData: LiveData<List<SleepNight>>
+    get() = nights
 
     private val _navigateToSleepQuality = MutableLiveData<SleepNight>()
 
